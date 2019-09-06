@@ -31,8 +31,8 @@ class Role(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     name = db.Column(db.String(16),unique=True)
     users = db.relationship('User',backref="Role")
-    def __repr__(self):
-        return "身份是{},id是".format(self.name,self.id)
+    # def __repr__(self):
+    #     return "身份是{},id是".format(self.name,self.id)
 
 class User(db.Model):
     __tablename__ = 'users'
@@ -81,6 +81,15 @@ if __name__ == '__main__':
         db.session.add(user)
         db.session.commit()
 
-
+    # 查询 所有用户
+    print(User.query.all())
+    # 查询用户个数
+    print(User.query.count())
+    # 查询 id 为1的信息
+    print(User.query.get(1))
+    # 查询id为4的信息
+    print(User.query.filter_by(id=4).first())
+    # 查询id为4的信息
+    print(User.query.filter(User.id>=4).all())
 
     app.run()
